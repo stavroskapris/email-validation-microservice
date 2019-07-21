@@ -1,14 +1,18 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Cache;
 
+use App\Http\Contracts\CacheInterface;
 use Exception;
-use Illuminate\Contracts\Cache\Store;
 
+/**
+ * Class CacheService
+ * @package App\Services\Cache
+ */
 class CacheService
 {
     /**
-     * @var Store
+     * @var CacheInterface
      */
     private $cacheProvider;
 
@@ -25,7 +29,7 @@ class CacheService
 
     /**
      * @param string $key
-     * @return bool
+     * @return bool|string
      */
     public function get(string $key)
     {
@@ -34,11 +38,11 @@ class CacheService
 
     /**
      * @param string $key
-     * @param bool $value
+     * @param string $value
      * @param int $ttl
      */
-    public function set(string $key, bool $value, int $ttl): void
+    public function set(string $key, string $value, int $ttl): void
     {
-        $this->cacheProvider->put($key, $value, $ttl);
+        $this->cacheProvider->set($key, $value, $ttl);
     }
 }

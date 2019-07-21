@@ -40,7 +40,11 @@ Success-Error response in json format.
 ### Success Response
     Response body:
     {
-        "disposable": false
+        "disposable": "false"
+    }
+    Response body:
+    {
+        "disposable": "true"
     }
     
     

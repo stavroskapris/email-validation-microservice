@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Providers\ValidationProviders;
+namespace App\Providers\Validation;
 
-use App\Services\Cache\AbsentCacheService\AbsentCacheService;
-use App\Services\CacheService;
+use App\Providers\Cache\AbsentCache;
+use App\Services\Cache\CacheService;
 use GuzzleHttp\Client;
 
 /**
@@ -37,25 +37,27 @@ abstract class ValidationProvider
     public function __construct(
         Client $client,
         CacheService $cacheService
-    ) {
+    )
+    {
         $this->client = $client;
         $this->cacheService = $cacheService;
     }
 
     /**
      * @param string $domain
-     * @return bool
+     * @return string
      */
-    abstract function validateByRequest(string $domain): bool;
+    abstract function validateByRequest(string $domain): string;
 
     /**
      * @param string $domain
-     * @return bool
+     * @return string
      */
-    public function validate(string $domain): bool
+    public function validate(string $domain): string
     {
-        if (!$this->cacheService instanceof AbsentCacheService && $this->isDisposable = $this->cacheService->get($domain)) {
-            return $this->isDisposable;
+        if (!$this->cacheService instanceof AbsentCache && $this->isDisposable = $this->cacheService->get($domain)) {
+
+            return $this->isDisposable . ' cached';
         } else {
             return $this->validateByRequest($domain);
         }

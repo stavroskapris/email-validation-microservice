@@ -2,16 +2,21 @@
 
 namespace Tests\Unit\app\Services;
 
-use App\Services\Cache\AbsentCacheService\AbsentCacheService;
-use App\Services\CacheGetService;
-use App\Services\CacheService;
-use Illuminate\Cache\RedisStore;
+use App\Providers\Cache\AbsentCache;
+use App\Providers\Cache\MemCachedCache;
+use App\Providers\Cache\RedisCache;
 
-use /** @noinspection PhpComposerExtensionStubsInspection */
-    Memcached;
+
+use App\Services\Cache\CacheGetService;
+use App\Services\Cache\CacheService;
+
 use Mockery;
 use Tests\TestCase;
 
+/**
+ * Class CacheServiceTest
+ * @package Tests\Unit\app\Services
+ */
 class CacheServiceTest extends TestCase
 {
     /**
@@ -23,34 +28,34 @@ class CacheServiceTest extends TestCase
         $mockCacheGetService = Mockery::mock(CacheGetService::class);
         $this->app->instance(CacheGetService::class, $mockCacheGetService);
 
-        if (class_exists('RedisStore')) {
-            $mockRedisStore = Mockery::mock(RedisStore::class);
-            $mockRedisStore->shouldReceive('get')
+        if (class_exists('Redis')) {
+            $mockRedisCache = Mockery::mock(RedisCache::class);
+            $mockRedisCache->shouldReceive('get')
                 ->withArgs(['hotmail.com'])
                 ->once()
                 ->andReturn(['hotmail.com' => false]);
             $mockCacheGetService->shouldReceive('getCacheProvider')
                 ->once()
-                ->andReturn($mockRedisStore);
-        } elseif (class_exists('MemcachedStore')) {
+                ->andReturn($mockRedisCache);
+        } elseif (class_exists('Memcached')) {
             /** @noinspection PhpComposerExtensionStubsInspection */
-            $mockMemcachedStore = Mockery::mock(Memcached::class);
-            $mockMemcachedStore->shouldReceive('get')
+            $mockMemcachedCache = Mockery::mock(MemCachedCache::class);
+            $mockMemcachedCache->shouldReceive('get')
                 ->withArgs(['hotmail.com'])
                 ->once()
                 ->andReturn(['hotmail.com' => false]);
             $mockCacheGetService->shouldReceive('getCacheProvider')
                 ->once()
-                ->andReturn($mockMemcachedStore);
+                ->andReturn($mockMemcachedCache);
         } else {
-            $mockAbsentStore = Mockery::mock(AbsentCacheService::class);
-            $mockAbsentStore->shouldReceive('get')
+            $mockAbsentCache = Mockery::mock(AbsentCache::class);
+            $mockAbsentCache->shouldReceive('get')
                 ->withArgs(['hotmail.com'])
                 ->once()
                 ->andReturn(['hotmail.com' => false]);
             $mockCacheGetService->shouldReceive('getCacheProvider')
                 ->once()
-                ->andReturn($mockAbsentStore);
+                ->andReturn($mockAbsentCache);
         }
         /** @noinspection PhpUnhandledExceptionInspection */
         $cacheServiceTest = app()->make(CacheService::class);
@@ -68,34 +73,34 @@ class CacheServiceTest extends TestCase
         $mockCacheGetService = Mockery::mock(CacheGetService::class);
         $this->app->instance(CacheGetService::class, $mockCacheGetService);
 
-        if (class_exists('RedisStore')) {
-            $mockRedisStore = Mockery::mock(RedisStore::class);
-            $mockRedisStore->shouldReceive('put')
+        if (class_exists('Redis')) {
+            $mockRedisCache = Mockery::mock(RedisCache::class);
+            $mockRedisCache->shouldReceive('set')
                 ->withArgs(['hotmail.com', false, config('cache.ttl')])
                 ->once()
                 ->andReturnNull();
             $mockCacheGetService->shouldReceive('getCacheProvider')
                 ->once()
-                ->andReturn($mockRedisStore);
-        } elseif (class_exists('MemcachedStore')) {
+                ->andReturn($mockRedisCache);
+        } elseif (class_exists('Memcached')) {
             /** @noinspection PhpComposerExtensionStubsInspection */
-            $mockMemcachedStore = Mockery::mock(Memcached::class);
-            $mockMemcachedStore->shouldReceive('put')
+            $mockMemcachedCache = Mockery::mock(MemCachedCache::class);
+            $mockMemcachedCache->shouldReceive('set')
                 ->withArgs(['hotmail.com', false, config('cache.ttl')])
                 ->once()
                 ->andReturnNull();
             $mockCacheGetService->shouldReceive('getCacheProvider')
                 ->once()
-                ->andReturn($mockMemcachedStore);
+                ->andReturn($mockMemcachedCache);
         } else {
-            $mockAbsentStore = Mockery::mock(AbsentCacheService::class);
-            $mockAbsentStore->shouldReceive('put')
+            $mockAbsentCache = Mockery::mock(AbsentCache::class);
+            $mockAbsentCache->shouldReceive('set')
                 ->withArgs(['hotmail.com', false, config('cache.ttl')])
                 ->once()
                 ->andReturnNull();
             $mockCacheGetService->shouldReceive('getCacheProvider')
                 ->once()
-                ->andReturn($mockAbsentStore);
+                ->andReturn($mockAbsentCache);
         }
         /** @noinspection PhpUnhandledExceptionInspection */
         $cacheServiceTest = app()->make(CacheService::class);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers\ValidationProviders;
+namespace App\Providers\Validation;
 
 use App\Http\Models\LogExceptions;
 use Exception;
@@ -20,19 +20,20 @@ class OpenKickBoxIo extends ValidationProvider
 
     /**
      * @param string $domain
-     * @return bool
+     * @return string
      * @throws GuzzleException
      * @throws Exception
      */
-    public function validateByRequest(string $domain): bool
+    public function validateByRequest(string $domain): string
     {
+
         try {
             $response = $this->client->request(
                 'GET',
-                self::DISPOSABLE_CHECK_API_URL.$domain,
+                self::DISPOSABLE_CHECK_API_URL . $domain,
                 [
                     'connect_timeout' => 5,
-                    'timeout'         => 3
+                    'timeout' => 3
                 ]
             );
 
@@ -41,7 +42,8 @@ class OpenKickBoxIo extends ValidationProvider
                     ->getContents(),
                 true
             );
-            $this->isDisposable = $responseContent['disposable'] == true;
+            $this->isDisposable = $responseContent['disposable'] == true ? 'true' : 'false';
+
             //cache result
             $this->cacheService->set($domain, $this->isDisposable, config('cache.ttl'));
 

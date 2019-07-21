@@ -3,7 +3,8 @@
 namespace App\Http\Models;
 
 use Log;
-use Exception;
+use Throwable;
+
 
 /**
  * Class LogExceptions
@@ -13,11 +14,10 @@ use Exception;
 class LogExceptions
 {
     /**
-     * @param Exception $exception
+     * @param Throwable $exception
      * @param string|null $type
-     * @return void
      */
-    public static function log(Exception $exception, ?string $type): void
+    public static function log(Throwable $exception, ?string $type): void
     {
         Log::error($exception->getMessage(), [$type, $exception->getTraceAsString()]);
     }

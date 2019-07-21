@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Providers\ValidationProviders\OpenKickBoxIo;
-use App\Providers\ValidationProviders\Debounce;
-use App\Providers\ValidationProviders\ValidationProvider;
+use App\Providers\Validation\OpenKickBoxIo;
+use App\Providers\Validation\Debounce;
+use App\Providers\Validation\ValidationProvider;
 
 /**
  * Class ValidationProviderGetService

@@ -63,18 +63,25 @@ return [
                 // Memcached::OPT_CONNECT_TIMEOUT => 2000,
             ],
             'servers' => [
-                [
-                    'host' => env('MEMCACHED_HOST', '127.0.0.1'),
-                    'port' => env('MEMCACHED_PORT', 11211),
-                    'weight' => 100,
-                ],
+
+                'host' => env('MEMCACHED_HOST', '127.0.0.1'),
+                'port' => env('MEMCACHED_PORT', 11211),
+                'weight' => 100,
             ],
         ],
 
+        //Redis settings
         'redis' => [
-            'driver' => 'redis',
-            'connection' => 'cache',
+            'servers' => [
+                'host' => env('REDIS_HOST', '127.0.0.1'),
+                'port' => env('REDIS_PORT', 6379),
+            ]
         ],
+
+//        'redis' => [
+//            'driver' => 'redis',
+//            'connection' => 'cache',
+//        ],
 
         'dynamodb' => [
             'driver' => 'dynamodb',
@@ -97,7 +104,7 @@ return [
     |
     */
 
-    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache'),
+    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_cache'),
 
 
     /*
@@ -105,5 +112,5 @@ return [
     | Cache ttl
     |--------------------------------------------------------------------------
     */
-    'ttl'=>env('CACHE_TTL',11)
+    'ttl' => env('CACHE_TTL', 11)
 ];

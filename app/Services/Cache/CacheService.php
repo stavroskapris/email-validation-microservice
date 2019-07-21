@@ -7,6 +7,7 @@ use Exception;
 
 /**
  * Class CacheService
+ *
  * @package App\Services\Cache
  */
 class CacheService

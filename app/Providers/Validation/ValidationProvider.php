@@ -37,8 +37,7 @@ abstract class ValidationProvider
     public function __construct(
         Client $client,
         CacheService $cacheService
-    )
-    {
+    ) {
         $this->client = $client;
         $this->cacheService = $cacheService;
     }
@@ -57,7 +56,7 @@ abstract class ValidationProvider
     {
         if (!$this->cacheService instanceof AbsentCache && $this->isDisposable = $this->cacheService->get($domain)) {
 
-            return $this->isDisposable . ' cached';
+            return $this->isDisposable.' cached';
         } else {
             return $this->validateByRequest($domain);
         }

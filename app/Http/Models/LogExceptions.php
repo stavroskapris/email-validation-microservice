@@ -5,7 +5,6 @@ namespace App\Http\Models;
 use Log;
 use Throwable;
 
-
 /**
  * Class LogExceptions
  *

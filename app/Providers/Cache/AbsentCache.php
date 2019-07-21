@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Providers\Cache;
-
 
 use App\Http\Contracts\CacheInterface;
 
 class AbsentCache implements CacheInterface
 {
-
     /**
      * @param string $key
      * @return bool|string|void

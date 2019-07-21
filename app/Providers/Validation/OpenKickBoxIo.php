@@ -30,10 +30,10 @@ class OpenKickBoxIo extends ValidationProvider
         try {
             $response = $this->client->request(
                 'GET',
-                self::DISPOSABLE_CHECK_API_URL . $domain,
+                self::DISPOSABLE_CHECK_API_URL.$domain,
                 [
                     'connect_timeout' => 5,
-                    'timeout' => 3
+                    'timeout'         => 3
                 ]
             );
 

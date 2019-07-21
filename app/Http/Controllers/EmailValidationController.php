@@ -26,6 +26,7 @@ class EmailValidationController
      */
     public function validate(EmailValidationService $emailValidationService): JsonResponse
     {
+
         try {
             $email = trim(request()->input('email'));
             //check if required email param is present and if not

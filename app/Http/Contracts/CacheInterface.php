@@ -1,10 +1,10 @@
 <?php
 
-
 namespace App\Http\Contracts;
 
 /**
  * Interface CacheInterface
+ *
  * @package App\Http\Contracts
  */
 interface CacheInterface
@@ -22,5 +22,4 @@ interface CacheInterface
      * @return mixed
      */
     public function set(string $key, string $value, $ttl = 10);
-
 }

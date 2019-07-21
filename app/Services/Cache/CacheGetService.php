@@ -10,7 +10,6 @@ use App\Providers\Cache\RedisCache;
 
 use Exception;
 
-
 /**
  * Class CacheGetService
  *
@@ -27,7 +26,6 @@ class CacheGetService
      * @var CacheInterface
      */
     private $cacheStore;
-
 
     /**
      * @return CacheInterface

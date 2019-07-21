@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Class Debounce
+ *
  * @package App\Providers\Validation
  */
 class Debounce extends ValidationProvider

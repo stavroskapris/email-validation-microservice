@@ -1,13 +1,10 @@
 <?php
 
-
 namespace App\Providers\Cache;
-
 
 use App\Http\Contracts\CacheInterface;
 use App\Http\Models\LogExceptions;
 use Redis;
-
 
 class RedisCache implements CacheInterface
 {
@@ -28,13 +25,12 @@ class RedisCache implements CacheInterface
     {
         try {
             //create redis instance
-            $this->redis = new \Redis();
+            $this->redis = new Redis();
             //connect with server and port
             $this->redis->connect(
                 config('cache.stores.redis.servers.host'),
                 config('cache.stores.redis.servers.port')
             );
-
         } catch (\Throwable $e) {
             LogExceptions::log($e, self::EXCEPTION_TYPE);
             return false;
@@ -44,6 +40,7 @@ class RedisCache implements CacheInterface
     /**
      * Retrieve a cached item
      * if present
+     *
      * @param string $key
      * @return bool|string
      */
@@ -54,6 +51,7 @@ class RedisCache implements CacheInterface
 
     /**
      * Cache an item
+     *
      * @param string $key
      * @param string $value
      * @param int $ttl
@@ -62,7 +60,5 @@ class RedisCache implements CacheInterface
     public function set(string $key, string $value, $ttl = 10)
     {
         $this->redis->set($key, $value, $ttl);
-
     }
-
 }

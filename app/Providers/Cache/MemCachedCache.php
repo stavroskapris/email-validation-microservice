@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Providers\Cache;
-
 
 use App\Http\Contracts\CacheInterface;
 use App\Http\Models\LogExceptions;
@@ -10,11 +8,11 @@ use Memcached;
 
 /**
  * Class MemCachedCache
+ *
  * @package App\Providers\Cache
  */
 class MemCachedCache implements CacheInterface
 {
-
     /**
      * @var Memcached
      */
@@ -38,17 +36,17 @@ class MemCachedCache implements CacheInterface
                 config('cache.stores.memcached.servers.host'),
                 config('cache.stores.memcached.servers.port')
             );
-
         } catch (\Throwable $e) {
             LogExceptions::log($e, self::EXCEPTION_TYPE);
+
             return false;
         }
-
     }
 
     /**
      * Retrieve a cached item
      * if present
+     *
      * @param string $key
      * @return bool|string
      */
@@ -59,6 +57,7 @@ class MemCachedCache implements CacheInterface
 
     /**
      * Cache an item
+     *
      * @param string $key
      * @param string $value
      * @param int $ttl

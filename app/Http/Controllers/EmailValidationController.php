@@ -51,7 +51,7 @@ class EmailValidationController
             $providerToUse = !empty(request()->input('provider')) ? trim(request()->input('provider')) : null;
 
             return response()->json(
-                $emailValidationService->validateEmail($domain, $providerToUse),
+                ['disposable' => $emailValidationService->validateEmail($domain, $providerToUse)],
                 200
             );
         } catch (Exception $e) {

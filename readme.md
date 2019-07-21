@@ -38,33 +38,20 @@ Success-Error response in json format.
      * debounce
   
 ### Success Response
-    
-     Response body:
+    Response body:
     {
-       "response":{
-          "status":1,
-          "message":"success",
-          "shortUrl":"your shortened url"
-       }
+        "disposable": false
     }
     
-    "status":1 and "message":"success" indicates success
+    
 ### Error Response
-    Response body: 
-    {
-      "response":{
-         "status":0,
-         "message":"Error message",
-         "error_code": Error code
-      }
-    }
-    
-    "status":0 indicates failure, refer to error message and code for further information
+    Response body:
+       {
+           "message": "error_message"
+       }
 
 ## Error Codes and Messages
-    * 1000  The url param is required
-    * 1001  Service Unavailable
-    * 1002  Url is not valid
+    * 422  The email param is required
 
         
 ## Run the app

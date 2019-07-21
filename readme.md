@@ -1,5 +1,5 @@
 # Email validation  microservice
-##Functionality
+## Functionality
 
 This microservice takes as parameters one email or domain and one provider and returns whether 
 the corresponding email address is disposable. The microservice provides only one route. 

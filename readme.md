@@ -1,4 +1,4 @@
-#Email validation  microservice
+# Email validation  microservice
 ##Functionality
 
 This microservice takes as parameters one email or domain and one provider and returns whether 

@@ -2,12 +2,16 @@
 
 namespace Tests\Unit\app\Services;
 
-use App\Providers\ValidationProviders\Debounce;
-use App\Providers\ValidationProviders\OpenKickBoxIo;
+use App\Providers\Validation\Debounce;
+use App\Providers\Validation\OpenKickBoxIo;
 use App\Services\ValidationProviderGetService;
 use Mockery;
 use Tests\TestCase;
 
+/**
+ * Class ValidationProviderGetServiceTest
+ * @package Tests\Unit\app\Services
+ */
 class ValidationProviderGetServiceTest extends TestCase
 {
     /**

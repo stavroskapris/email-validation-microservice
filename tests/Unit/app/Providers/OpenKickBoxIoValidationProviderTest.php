@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\app\Providers;
 
-use App\Providers\ValidationProviders\OpenKickBoxIo;
-use App\Services\CacheService;
+use App\Providers\Validation\OpenKickBoxIo;
+use App\Services\Cache\CacheService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 

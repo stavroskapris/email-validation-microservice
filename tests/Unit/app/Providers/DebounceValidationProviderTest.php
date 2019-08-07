@@ -2,13 +2,17 @@
 
 namespace Tests\Unit\app\Providers;
 
-use App\Providers\ValidationProviders\Debounce;
-use App\Services\CacheService;
+use App\Providers\Validation\Debounce;
+use App\Services\Cache\CacheService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Tests\TestCase;
 use Mockery;
 
+/**
+ * Class DebounceValidationProviderTest
+ * @package Tests\Unit\app\Providers
+ */
 class DebounceValidationProviderTest extends TestCase
 {
     /**

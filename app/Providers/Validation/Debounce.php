@@ -1,11 +1,16 @@
 <?php
 
-namespace App\Providers\ValidationProviders;
+namespace App\Providers\Validation;
 
 use App\Http\Models\LogExceptions;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
+/**
+ * Class Debounce
+ *
+ * @package App\Providers\Validation
+ */
 class Debounce extends ValidationProvider
 {
     /**
@@ -20,11 +25,11 @@ class Debounce extends ValidationProvider
 
     /**
      * @param string $domain
-     * @return bool
+     * @return string
      * @throws GuzzleException
      * @throws Exception
      */
-    public function validateByRequest(string $domain): bool
+    public function validateByRequest(string $domain): string
     {
         $fakeEmail = 'stavros@'.$domain;
         try {
@@ -43,7 +48,7 @@ class Debounce extends ValidationProvider
                 true
             );
 
-            $this->isDisposable = $responseContent['disposable'] == 'true';
+            $this->isDisposable = $responseContent['disposable'];
             //cache result
             $this->cacheService->set($domain, $this->isDisposable, config('cache.ttl'));
 

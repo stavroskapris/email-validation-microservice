@@ -14,12 +14,13 @@ Any extra parameters will be ignored.
 The microservice caches the returned value for a given time and returns 
 Success-Error response in json format.
 
-# Routes
+# Route
 
-
-### Request
-`Post /api/validate`
-  
+### Request api endpoint
+```bash 
+Post /api/validate
+```
+### Request Headers
 ```bash 
 Accept: application/x-www-form-urlencoded
 ```

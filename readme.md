@@ -23,14 +23,13 @@ Success-Error response in json format.
     Accept: application/x-www-form-urlencoded
         
 ### Params
-    |-------------|--------------------------------|------------------|
-    | Name        | Value                          | Required/Optional|
-    |-------------|--------------------------------|------------------|      
-    | email       | the email address to validate  | required         |
-    |-------------|--------------------------------|------------------|
-    | provider    | string, the email validation   | optional         |
-    |             | provider to use                |                  |
-    |-------------|--------------------------------|------------------|
+
+Name          | Value                                        | Required/Optional
+--------------|--------------------------------------------- |------------------
+**email**     | the email address to validate                |required
+              |                                              |
+**provider**  | string, the email validation provider to use |optional
+                           
     
 ### Providers
      Currently the service supports three providers

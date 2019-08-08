@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\app\Services;
+namespace Tests\Unit\app\Services\Validation;
 
 use App\Providers\Validation\Debounce;
 use App\Providers\Validation\OpenKickBoxIo;

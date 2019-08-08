@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\app\Services;
+namespace Tests\Unit\app\Services\Validation;
 
 use App\Providers\Validation\Debounce;
 use App\Providers\Validation\OpenKickBoxIo;
@@ -40,7 +40,7 @@ class EmailValidationServiceTest extends TestCase
 
         $result = $emailValidationService->validateEmail('hotmail.com', 'kickbox');
 
-        $this->assertTrue($result);
+        $this->assertEquals('1',$result);
     }
 
     /**
@@ -68,6 +68,6 @@ class EmailValidationServiceTest extends TestCase
 
         $result = $emailValidationService->validateEmail('foo.com', 'debounce');
 
-        $this->assertTrue($result);
+        $this->assertEquals('1',$result);
     }
 }

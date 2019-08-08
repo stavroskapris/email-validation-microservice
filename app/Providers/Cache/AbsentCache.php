@@ -12,7 +12,7 @@ class AbsentCache implements CacheInterface
      */
     public function get(string $key)
     {
-        return;
+        return false;
     }
 
     /**
@@ -23,6 +23,6 @@ class AbsentCache implements CacheInterface
      */
     public function set(string $key, string $value, $ttl = 10)
     {
-        return;
+        return false;
     }
 }

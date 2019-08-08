@@ -1,22 +1,26 @@
 <?php
 
-namespace Tests\Unit\app\Providers;
+namespace Tests\Unit\app\Providers\Validation;
 
-use App\Providers\Validation\OpenKickBoxIo;
+use App\Providers\Validation\Debounce;
 use App\Services\Cache\CacheService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-
 use Tests\TestCase;
 use Mockery;
 
-class OpenKickBoxIoProviderTest extends TestCase
+/**
+ * Class DebounceValidationProviderTest
+ *
+ * @package Tests\Unit\app\Validation\Providers
+ */
+class DebounceValidationProviderTest extends TestCase
 {
     /**
      * @test
-     * @see OpenKickBoxIo::validateByRequest()
+     * @see Debounce::validateByRequest()
      */
-    public function openKickBoxIoValidateByRequestReturnsFalseAsExpected()
+    public function debounceValidateByRequestReturnsFalseAsExpected()
     {
         $mockClient = Mockery::mock(Client::class);
         $mockCacheService = Mockery::mock(CacheService::class);
@@ -25,27 +29,28 @@ class OpenKickBoxIoProviderTest extends TestCase
         $this->app->instance(CacheService::class, $mockCacheService);
 
         /** @noinspection PhpUnhandledExceptionInspection */
-        $validationProvider = app()->make(OpenKickBoxIo::class);
+        $validationProvider = app()->make(Debounce::class);
 
         $mockCacheService->shouldReceive('set')
             ->once()
-            ->withArgs(['hotmail.com', false, config('cache.ttl')])
+            ->withArgs(['hotmail.com', 'false', config('cache.ttl')])
             ->andReturnNull();
 
-        $apiResponseBody = '{"disposable": false}';
+        $apiResponseBody = '{"disposable": "false"}';
         $mockClient->shouldReceive('request')
             ->once()
             ->andReturn(New Response(200, [], $apiResponseBody))
             ->getMock();
-
-        $this->assertFalse($validationProvider->validateByRequest('hotmail.com'));
+        $result = $validationProvider->validateByRequest('hotmail.com');
+        $this->assertIsString($result);
+        $this->assertEquals('false', $result);
     }
 
     /**
      * @test
-     * @see OpenKickBoxIo::validateByRequest()
+     * @see Debounce::validateByRequest()
      */
-    public function openKickBoxIoValidateByRequestReturnsTrueAsExpected()
+    public function debounceValidateByRequestReturnsTrueAsExpected()
     {
         $mockClient = Mockery::mock(Client::class);
         $mockCacheService = Mockery::mock(CacheService::class);
@@ -54,19 +59,20 @@ class OpenKickBoxIoProviderTest extends TestCase
         $this->app->instance(CacheService::class, $mockCacheService);
 
         /** @noinspection PhpUnhandledExceptionInspection */
-        $validationProvider = app()->make(OpenKickBoxIo::class);
+        $validationProvider = app()->make(Debounce::class);
 
         $mockCacheService->shouldReceive('set')
             ->once()
-            ->withArgs(['hotmail.com', true, config('cache.ttl')])
+            ->withArgs(['hotmail.com', 'true', config('cache.ttl')])
             ->andReturnNull();
 
-        $apiResponseBody = '{"disposable": true}';
+        $apiResponseBody = '{"disposable": "true"}';
         $mockClient->shouldReceive('request')
             ->once()
             ->andReturn(New Response(200, [], $apiResponseBody))
             ->getMock();
-
-        $this->assertTrue($validationProvider->validateByRequest('hotmail.com'));
+        $result = $validationProvider->validateByRequest('hotmail.com');
+        $this->assertIsString($result);
+        $this->assertEquals('true', $result);
     }
 }

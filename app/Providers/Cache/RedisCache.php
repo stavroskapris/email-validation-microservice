@@ -33,12 +33,13 @@ class RedisCache implements CacheInterface
             );
         } catch (\Throwable $e) {
             LogExceptions::log($e, self::EXCEPTION_TYPE);
+
             return false;
         }
     }
 
     /**
-     * Retrieve a cached item
+     * Retrieve from cache item
      * if present
      *
      * @param string $key
@@ -50,7 +51,7 @@ class RedisCache implements CacheInterface
     }
 
     /**
-     * Cache an item
+     * Store in cache an item
      *
      * @param string $key
      * @param string $value

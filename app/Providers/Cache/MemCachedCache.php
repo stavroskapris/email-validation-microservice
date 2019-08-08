@@ -44,7 +44,7 @@ class MemCachedCache implements CacheInterface
     }
 
     /**
-     * Retrieve a cached item
+     * Retrieve from cache item
      * if present
      *
      * @param string $key
@@ -56,7 +56,7 @@ class MemCachedCache implements CacheInterface
     }
 
     /**
-     * Cache an item
+     * Store in cache an item
      *
      * @param string $key
      * @param string $value

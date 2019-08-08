@@ -68,7 +68,7 @@ class CacheServiceTest extends TestCase
      * @test
      * @see CacheService::set()
      */
-    public function putCallsProperProvider()
+    public function setCallsProperProvider()
     {
         $mockCacheGetService = Mockery::mock(CacheGetService::class);
         $this->app->instance(CacheGetService::class, $mockCacheGetService);
@@ -76,7 +76,7 @@ class CacheServiceTest extends TestCase
         if (class_exists('Redis')) {
             $mockRedisCache = Mockery::mock(RedisCache::class);
             $mockRedisCache->shouldReceive('set')
-                ->withArgs(['hotmail.com', false, config('cache.ttl')])
+                ->withArgs(['hotmail.com', 'false', config('cache.ttl')])
                 ->once()
                 ->andReturnNull();
             $mockCacheGetService->shouldReceive('getCacheProvider')
@@ -86,7 +86,7 @@ class CacheServiceTest extends TestCase
             /** @noinspection PhpComposerExtensionStubsInspection */
             $mockMemcachedCache = Mockery::mock(MemCachedCache::class);
             $mockMemcachedCache->shouldReceive('set')
-                ->withArgs(['hotmail.com', false, config('cache.ttl')])
+                ->withArgs(['hotmail.com', 'false', config('cache.ttl')])
                 ->once()
                 ->andReturnNull();
             $mockCacheGetService->shouldReceive('getCacheProvider')
@@ -95,7 +95,7 @@ class CacheServiceTest extends TestCase
         } else {
             $mockAbsentCache = Mockery::mock(AbsentCache::class);
             $mockAbsentCache->shouldReceive('set')
-                ->withArgs(['hotmail.com', false, config('cache.ttl')])
+                ->withArgs(['hotmail.com', 'false', config('cache.ttl')])
                 ->once()
                 ->andReturnNull();
             $mockCacheGetService->shouldReceive('getCacheProvider')
@@ -104,7 +104,7 @@ class CacheServiceTest extends TestCase
         }
         /** @noinspection PhpUnhandledExceptionInspection */
         $cacheServiceTest = app()->make(CacheService::class);
-        $res = $cacheServiceTest->set('hotmail.com', false, config('cache.ttl'));
+        $res = $cacheServiceTest->set('hotmail.com', 'false', config('cache.ttl'));
         $this->assertNull($res);
     }
 }

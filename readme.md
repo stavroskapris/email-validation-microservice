@@ -18,16 +18,17 @@ Success-Error response in json format.
 
 
 ### Request
-  `Post /api/validate`
- 
-    Accept: application/x-www-form-urlencoded
+`Post /api/validate`
+  
+```bash 
+Accept: application/x-www-form-urlencoded
+```
         
 ### Params
 
 Name          | Value                                        | Required/Optional
 --------------|--------------------------------------------- |------------------
 **email**     | the email address to validate                |required
-              |                                              |
 **provider**  | string, the email validation provider to use |optional
                            
     

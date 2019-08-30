@@ -23,19 +23,7 @@ class RedisCache implements CacheInterface
      */
     public function __construct()
     {
-        try {
-            //create redis instance
-            $this->redis = new Redis();
-            //connect with server and port
-            $this->redis->connect(
-                config('cache.stores.redis.servers.host'),
-                config('cache.stores.redis.servers.port')
-            );
-        } catch (\Throwable $e) {
-            LogExceptions::log($e, self::EXCEPTION_TYPE);
-
-            return false;
-        }
+        $this->initializeRedis();
     }
 
     /**
@@ -61,5 +49,27 @@ class RedisCache implements CacheInterface
     public function set(string $key, string $value, $ttl = 10)
     {
         $this->redis->set($key, $value, $ttl);
+    }
+
+    /**
+     * Initialize Redis Cache
+     *
+     * @return void
+     */
+    public function initializeRedis()
+    {
+        try {
+            //create redis instance
+            $this->redis = new Redis();
+            //connect with server and port
+            $this->redis->connect(
+                config('cache.stores.redis.servers.host'),
+                config('cache.stores.redis.servers.port')
+            );
+        } catch (\Throwable $e) {
+            LogExceptions::log($e, self::EXCEPTION_TYPE);
+
+            $this->redis = false;
+        }
     }
 }

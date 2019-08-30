@@ -28,19 +28,7 @@ class MemCachedCache implements CacheInterface
      */
     public function __construct()
     {
-        try {
-            //create memcached instance
-            $this->memcached = new Memcached();
-            //connect with server and port
-            $this->memcached->addServer(
-                config('cache.stores.memcached.servers.host'),
-                config('cache.stores.memcached.servers.port')
-            );
-        } catch (\Throwable $e) {
-            LogExceptions::log($e, self::EXCEPTION_TYPE);
-
-            return false;
-        }
+        $this->initializeMemcached();
     }
 
     /**
@@ -66,5 +54,27 @@ class MemCachedCache implements CacheInterface
     public function set(string $key, string $value, $ttl = 10)
     {
         $this->memcached->set($key, $value, $ttl);
+    }
+
+    /**
+     * Initialize Memcached Cache
+     *
+     * @return void
+     */
+    public function initializeMemcached()
+    {
+        try {
+            //create redis instance
+            $this->memcached = new Memcached();
+            //connect with server and port
+            $this->memcached->addServer(
+                config('cache.stores.redis.servers.host'),
+                config('cache.stores.redis.servers.port')
+            );
+        } catch (\Throwable $e) {
+            LogExceptions::log($e, self::EXCEPTION_TYPE);
+
+            $this->memcached = false;
+        }
     }
 }

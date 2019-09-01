@@ -15,6 +15,7 @@ use Tests\TestCase;
 
 /**
  * Class CacheServiceTest
+ *
  * @package Tests\Unit\app\Services
  */
 class CacheServiceTest extends TestCase

@@ -4,6 +4,11 @@ namespace Tests\Integration;
 
 use Tests\TestCase;
 
+/**
+ * Class ApiTest
+ *
+ * @package Tests\Integration
+ */
 class ApiTest extends TestCase
 {
     /**

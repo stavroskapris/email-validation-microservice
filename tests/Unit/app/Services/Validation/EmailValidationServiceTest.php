@@ -11,6 +11,7 @@ use Tests\TestCase;
 
 /**
  * Class EmailValidationServiceTest
+ *
  * @package Tests\Unit\app\Services
  */
 class EmailValidationServiceTest extends TestCase

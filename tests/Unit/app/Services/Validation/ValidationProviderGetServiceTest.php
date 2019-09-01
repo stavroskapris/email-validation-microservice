@@ -10,6 +10,7 @@ use Tests\TestCase;
 
 /**
  * Class ValidationProviderGetServiceTest
+ *
  * @package Tests\Unit\app\Services
  */
 class ValidationProviderGetServiceTest extends TestCase

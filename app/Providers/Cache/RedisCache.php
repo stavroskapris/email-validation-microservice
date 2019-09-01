@@ -6,6 +6,11 @@ use App\Http\Contracts\CacheInterface;
 use App\Http\Models\LogExceptions;
 use Redis;
 
+/**
+ * Class RedisCache
+ *
+ * @package App\Providers\Cache
+ */
 class RedisCache implements CacheInterface
 {
     /**

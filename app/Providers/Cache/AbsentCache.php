@@ -4,6 +4,11 @@ namespace App\Providers\Cache;
 
 use App\Http\Contracts\CacheInterface;
 
+/**
+ * Class AbsentCache
+ *
+ * @package App\Providers\Cache
+ */
 class AbsentCache implements CacheInterface
 {
     /**

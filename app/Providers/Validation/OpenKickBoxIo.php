@@ -6,6 +6,11 @@ use App\Http\Models\LogExceptions;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
+/**
+ * Class OpenKickBoxIo
+ *
+ * @package App\Providers\Validation
+ */
 class OpenKickBoxIo extends ValidationProvider
 {
     /**

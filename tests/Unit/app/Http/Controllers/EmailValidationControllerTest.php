@@ -7,6 +7,11 @@ use App\Services\EmailValidationService;
 use Tests\TestCase;
 use Mockery;
 
+/**
+ * Class EmailValidationControllerTest
+ *
+ * @package Tests\app\Http\Controllers
+ */
 class EmailValidationControllerTest extends TestCase
 {
     /**

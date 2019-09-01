@@ -11,6 +11,11 @@ use App\Services\Cache\CacheGetService;
 
 use Tests\TestCase;
 
+/**
+ * Class CacheGetServiceTest
+ *
+ * @package Tests\Unit\app\Services
+ */
 class CacheGetServiceTest extends TestCase
 {
     /**

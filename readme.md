@@ -34,9 +34,16 @@ Name          | Value                                        | Required/Optional
                            
     
 ### Providers
-     Currently the service supports three providers
+     Currently the service supports two providers
      * kickbox(default)
      * debounce
+     
+### Cache
+     Currently the service supports two providers
+     * Redis
+     * Memcached
+     In case non of the above Classes are installed the API 
+     is still usable. 
   
 ### Success Response
     Response body:

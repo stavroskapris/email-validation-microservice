@@ -55,8 +55,7 @@ abstract class ValidationProvider
     public function validate(string $domain): string
     {
         if (!$this->cacheService instanceof AbsentCache && $this->isDisposable = $this->cacheService->get($domain)) {
-
-            return $this->isDisposable.' cached';
+            return $this->isDisposable;
         } else {
             return $this->validateByRequest($domain);
         }

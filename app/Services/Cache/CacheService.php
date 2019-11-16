@@ -30,7 +30,7 @@ class CacheService
 
     /**
      * @param string $key
-     * @return bool|string
+     * @return mixed
      */
     public function get(string $key)
     {

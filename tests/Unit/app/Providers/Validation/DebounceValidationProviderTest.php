@@ -5,7 +5,9 @@ namespace Tests\Unit\app\Providers\Validation;
 use App\Providers\Validation\Debounce;
 use App\Services\Cache\CacheService;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Tests\TestCase;
 use Mockery;
 
@@ -18,6 +20,8 @@ class DebounceValidationProviderTest extends TestCase
 {
     /**
      * @test
+     * @throws BindingResolutionException
+     * @throws GuzzleException
      * @see Debounce::validateByRequest()
      */
     public function debounceValidateByRequestReturnsFalseAsExpected()
@@ -28,7 +32,7 @@ class DebounceValidationProviderTest extends TestCase
         $this->app->instance(Client::class, $mockClient);
         $this->app->instance(CacheService::class, $mockCacheService);
 
-        /** @noinspection PhpUnhandledExceptionInspection */
+        /** @var Debounce $validationProvider */
         $validationProvider = app()->make(Debounce::class);
 
         $mockCacheService->shouldReceive('set')
@@ -48,6 +52,8 @@ class DebounceValidationProviderTest extends TestCase
 
     /**
      * @test
+     * @throws GuzzleException
+     * @throws BindingResolutionException
      * @see Debounce::validateByRequest()
      */
     public function debounceValidateByRequestReturnsTrueAsExpected()
@@ -58,7 +64,7 @@ class DebounceValidationProviderTest extends TestCase
         $this->app->instance(Client::class, $mockClient);
         $this->app->instance(CacheService::class, $mockCacheService);
 
-        /** @noinspection PhpUnhandledExceptionInspection */
+        /** @var Debounce $validationProvider */
         $validationProvider = app()->make(Debounce::class);
 
         $mockCacheService->shouldReceive('set')

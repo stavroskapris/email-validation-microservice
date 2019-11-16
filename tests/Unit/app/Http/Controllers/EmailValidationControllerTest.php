@@ -27,7 +27,6 @@ class EmailValidationControllerTest extends TestCase
 
         $this->app->instance(EmailValidationService::class, $mockEmailValidationService);
         $data = ['provider' => 'kickbox'];
-        //$response = $this->json('post', route('validateEmail', ['email'=>'','provider' => 'pipa']), $data);
         $response = $this->postJson(route('validateEmail'), $data);
 
         $response->assertStatus(422);

@@ -72,5 +72,11 @@ Name          | Value                                        | Required/Optional
     php artisan serve
 
 ## Run the tests
-    Inside projects directory command line run:
-    phpunit
+From the root of the project run
+##### Windows
+```
+.\vendor\bin\phpunit
+```
+##### Unix
+```
+./vendor/bin/phpunit

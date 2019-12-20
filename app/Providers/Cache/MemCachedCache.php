@@ -64,12 +64,12 @@ class MemCachedCache implements CacheInterface
     public function initializeMemcached()
     {
         try {
-            //create redis instance
+            //create memcached instance
             $this->memcached = new Memcached();
             //connect with server and port
             $this->memcached->addServer(
-                config('cache.stores.redis.servers.host'),
-                config('cache.stores.redis.servers.port')
+                config('cache.stores.memcached.servers.host'),
+                config('cache.stores.memcached.servers.port')
             );
         } catch (\Throwable $e) {
             LogExceptions::log($e, self::EXCEPTION_TYPE);

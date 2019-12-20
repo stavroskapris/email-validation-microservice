@@ -6,10 +6,10 @@ use App\Providers\Cache\AbsentCache;
 use App\Providers\Cache\MemCachedCache;
 use App\Providers\Cache\RedisCache;
 
-
 use App\Services\Cache\CacheGetService;
 use App\Services\Cache\CacheService;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Mockery;
 use Tests\TestCase;
 
@@ -22,6 +22,7 @@ class CacheServiceTest extends TestCase
 {
     /**
      * @test
+     * @throws BindingResolutionException
      * @see CacheService::get()
      */
     public function getCallsProperProvider()
@@ -36,10 +37,9 @@ class CacheServiceTest extends TestCase
                 ->once()
                 ->andReturn(['hotmail.com' => false]);
             $mockCacheGetService->shouldReceive('getCacheProvider')
-                ->once()
+                ->times(3)
                 ->andReturn($mockRedisCache);
         } elseif (class_exists('Memcached')) {
-            /** @noinspection PhpComposerExtensionStubsInspection */
             $mockMemcachedCache = Mockery::mock(MemCachedCache::class);
             $mockMemcachedCache->shouldReceive('get')
                 ->withArgs(['hotmail.com'])
@@ -58,15 +58,17 @@ class CacheServiceTest extends TestCase
                 ->once()
                 ->andReturn($mockAbsentCache);
         }
-        /** @noinspection PhpUnhandledExceptionInspection */
+        /** @var CacheService $cacheServiceTest */
         $cacheServiceTest = app()->make(CacheService::class);
         $res = $cacheServiceTest->get('hotmail.com');
+        dd($res);
         $this->assertIsArray($res);
         $this->assertArrayHasKey('hotmail.com', $res);
     }
 
     /**
      * @test
+     * @throws BindingResolutionException
      * @see CacheService::set()
      */
     public function setCallsProperProvider()
@@ -84,7 +86,7 @@ class CacheServiceTest extends TestCase
                 ->once()
                 ->andReturn($mockRedisCache);
         } elseif (class_exists('Memcached')) {
-            /** @noinspection PhpComposerExtensionStubsInspection */
+
             $mockMemcachedCache = Mockery::mock(MemCachedCache::class);
             $mockMemcachedCache->shouldReceive('set')
                 ->withArgs(['hotmail.com', 'false', config('cache.ttl')])
@@ -103,8 +105,9 @@ class CacheServiceTest extends TestCase
                 ->once()
                 ->andReturn($mockAbsentCache);
         }
-        /** @noinspection PhpUnhandledExceptionInspection */
+        /** @var CacheService $cacheServiceTest */
         $cacheServiceTest = app()->make(CacheService::class);
+        /** @noinspection PhpVoidFunctionResultUsedInspection */
         $res = $cacheServiceTest->set('hotmail.com', 'false', config('cache.ttl'));
         $this->assertNull($res);
     }

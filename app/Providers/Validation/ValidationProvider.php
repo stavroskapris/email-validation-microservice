@@ -34,10 +34,8 @@ abstract class ValidationProvider
      * @param Client $client
      * @param CacheService $cacheService
      */
-    public function __construct(
-        Client $client,
-        CacheService $cacheService
-    ) {
+    public function __construct(Client $client, CacheService $cacheService)
+    {
         $this->client = $client;
         $this->cacheService = $cacheService;
     }

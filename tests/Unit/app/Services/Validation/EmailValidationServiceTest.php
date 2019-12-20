@@ -6,6 +6,7 @@ use App\Providers\Validation\Debounce;
 use App\Providers\Validation\OpenKickBoxIo;
 use App\Services\EmailValidationService;
 use App\Services\ValidationProviderGetService;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Mockery;
 use Tests\TestCase;
 
@@ -18,6 +19,7 @@ class EmailValidationServiceTest extends TestCase
 {
     /**
      * @test
+     * @throws BindingResolutionException
      * @see EmailValidationService::validateEmail()
      */
     public function validateEmailUsesOpenKickBoxIoParamAsExpected()
@@ -36,7 +38,7 @@ class EmailValidationServiceTest extends TestCase
             ->getMock();
 
         $this->app->instance(ValidationProviderGetService::class, $mockValidationProviderGetService);
-        /** @noinspection PhpUnhandledExceptionInspection */
+        /** @var EmailValidationService $emailValidationService */
         $emailValidationService = app()->make(EmailValidationService::class);
 
         $result = $emailValidationService->validateEmail('hotmail.com', 'kickbox');
@@ -46,6 +48,7 @@ class EmailValidationServiceTest extends TestCase
 
     /**
      * @test
+     * @throws BindingResolutionException
      * @see EmailValidationService::validateEmail()
      */
     public function validateEmailUsesDebounceParamAsExpected()
@@ -64,7 +67,7 @@ class EmailValidationServiceTest extends TestCase
             ->getMock();
 
         $this->app->instance(ValidationProviderGetService::class, $mockValidationProviderGetService);
-        /** @noinspection PhpUnhandledExceptionInspection */
+        /** @var EmailValidationService $emailValidationService */
         $emailValidationService = app()->make(EmailValidationService::class);
 
         $result = $emailValidationService->validateEmail('foo.com', 'debounce');

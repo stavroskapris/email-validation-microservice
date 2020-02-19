@@ -60,8 +60,7 @@ class CacheServiceTest extends TestCase
         }
         /** @var CacheService $cacheServiceTest */
         $cacheServiceTest = app()->make(CacheService::class);
-        $res = $cacheServiceTest->get('hotmail.com');
-        dd($res);
+        $res = $cacheServiceTest->get('hotmail.com'); 
         $this->assertIsArray($res);
         $this->assertArrayHasKey('hotmail.com', $res);
     }

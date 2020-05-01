@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,4 +17,11 @@ use Illuminate\Http\Request;
  */
 Route::post('/validate', 'EmailValidationController@validate')
     ->name('validateEmail');
+
+/**
+ * Just a welcome route
+ */
+Route::get('/', function () {
+    return new JsonResponse('Api is up.Welcome..');
+});
 

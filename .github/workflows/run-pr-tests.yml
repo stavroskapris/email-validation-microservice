@@ -30,7 +30,7 @@ jobs:
           php-version: '7.2'
 
       - name: Install Composer Dependancies
-        run: composer install -o -n --no-ansi
+        run: composer install
 
       - name: Run PHPUnit Tests
         run: ./vendor/bin/phpunit

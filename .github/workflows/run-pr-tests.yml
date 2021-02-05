@@ -27,7 +27,7 @@ jobs:
       - name: Setup PHP Environment
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.2'
+          php-version: '7.3'
 
       - name: Install Composer Dependancies
         run: composer install

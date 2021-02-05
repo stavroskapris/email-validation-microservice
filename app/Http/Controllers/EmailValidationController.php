@@ -34,7 +34,6 @@ class EmailValidationController
             //terminate process by returning proper response
             if (empty($email)) {
                 return response()->json(
-
                     [
                         'message' => 'The email param is required',
                     ],

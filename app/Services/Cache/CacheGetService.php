@@ -34,10 +34,10 @@ class CacheGetService
     {
         try {
 
-            if (class_exists('Memcached')) {
-                $this->cacheStore = new MemCachedCache();
-            } elseif (class_exists('Redis')) {
+            if (class_exists('Redis')) {
                 $this->cacheStore = new RedisCache();
+            } elseif (class_exists('Memcached')) {
+                $this->cacheStore = new MemCachedCache();
             }
 
             return $this->cacheStore ? $this->cacheStore : new AbsentCache();

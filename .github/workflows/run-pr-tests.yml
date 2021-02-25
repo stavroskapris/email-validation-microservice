@@ -29,11 +29,17 @@ jobs:
         with:
           php-version: '7.3'
 
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
       - name: Install Composer Dependancies
         run: composer install
 
       - name: Generate encryption key
         run: php artisan key:generate
+
+      - name: Clear config
+        run: php artisan config:clear
 
       - name: Run PHPUnit Tests
         run: ./vendor/bin/phpunit

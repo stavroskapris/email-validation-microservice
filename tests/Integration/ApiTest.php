@@ -47,9 +47,8 @@ class ApiTest extends TestCase
     public function providerParamIsOptional()
     {
         $response = $this->post('/api/validate', ['email' => 'hotmail.com']);
-//        $response->assertStatus(200);
+        $response->assertStatus(200);
         $responseArray = json_decode($response->getContent(), true);
-        print_r($responseArray);
         $this->assertArrayNotHasKey('message', $responseArray);
         $this->assertArrayHasKey('disposable', $responseArray);
     }

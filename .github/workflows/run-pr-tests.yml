@@ -32,5 +32,8 @@ jobs:
       - name: Install Composer Dependancies
         run: composer install
 
+      - name: Generate encryption key
+        run: php artisan key:generate
+
       - name: Run PHPUnit Tests
         run: ./vendor/bin/phpunit

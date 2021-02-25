@@ -37,7 +37,7 @@ class CacheServiceTest extends TestCase
                 ->once()
                 ->andReturn(['hotmail.com' => false]);
             $mockCacheGetService->shouldReceive('getCacheProvider')
-                ->times(3)
+                ->once()
                 ->andReturn($mockRedisCache);
         } elseif (class_exists('Redis')) {
             $mockMemcachedCache = Mockery::mock(RedisCache::class);

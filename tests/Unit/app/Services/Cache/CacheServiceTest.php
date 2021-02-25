@@ -30,17 +30,17 @@ class CacheServiceTest extends TestCase
         $mockCacheGetService = Mockery::mock(CacheGetService::class);
         $this->app->instance(CacheGetService::class, $mockCacheGetService);
 
-        if (class_exists('Redis')) {
-            $mockRedisCache = Mockery::mock(RedisCache::class);
+        if (class_exists('Memcached')) {
+            $mockRedisCache = Mockery::mock(MemCachedCache::class);
             $mockRedisCache->shouldReceive('get')
                 ->withArgs(['hotmail.com'])
                 ->once()
                 ->andReturn(['hotmail.com' => false]);
             $mockCacheGetService->shouldReceive('getCacheProvider')
-                ->times(3)
+                ->once()
                 ->andReturn($mockRedisCache);
-        } elseif (class_exists('Memcached')) {
-            $mockMemcachedCache = Mockery::mock(MemCachedCache::class);
+        } elseif (class_exists('Redis')) {
+            $mockMemcachedCache = Mockery::mock(RedisCache::class);
             $mockMemcachedCache->shouldReceive('get')
                 ->withArgs(['hotmail.com'])
                 ->once()

@@ -21,6 +21,7 @@ class EmailValidationController
 
     /**
      * @param EmailValidationService $emailValidationService
+     *
      * @return JsonResponse
      * @throws Exception
      */
@@ -33,7 +34,6 @@ class EmailValidationController
             //terminate process by returning proper response
             if (empty($email)) {
                 return response()->json(
-
                     [
                         'message' => 'The email param is required',
                     ],
@@ -49,7 +49,7 @@ class EmailValidationController
                 $domain = substr($email, strrpos($email, '@'));
             }
             //get provider param
-            $providerToUse = !empty(request()->input('provider')) ? trim(request()->input('provider')) : null;
+            $providerToUse = ! empty(request()->input('provider')) ? trim(request()->input('provider')) : null;
 
             return response()->json(
                 ['disposable' => $emailValidationService->validateEmail($domain, $providerToUse)],

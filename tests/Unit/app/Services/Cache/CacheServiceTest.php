@@ -31,6 +31,7 @@ class CacheServiceTest extends TestCase
         $this->app->instance(CacheGetService::class, $mockCacheGetService);
 
         if (class_exists('Redis')) {
+            print_r("redis");
             $mockRedisCache = Mockery::mock(RedisCache::class);
             $mockRedisCache->shouldReceive('get')
                 ->withArgs(['hotmail.com'])
@@ -40,6 +41,7 @@ class CacheServiceTest extends TestCase
                 ->times(3)
                 ->andReturn($mockRedisCache);
         } elseif (class_exists('Memcached')) {
+            print_r("Memcached");
             $mockMemcachedCache = Mockery::mock(MemCachedCache::class);
             $mockMemcachedCache->shouldReceive('get')
                 ->withArgs(['hotmail.com'])
@@ -49,6 +51,7 @@ class CacheServiceTest extends TestCase
                 ->once()
                 ->andReturn($mockMemcachedCache);
         } else {
+            print_r("AbsentCache");
             $mockAbsentCache = Mockery::mock(AbsentCache::class);
             $mockAbsentCache->shouldReceive('get')
                 ->withArgs(['hotmail.com'])

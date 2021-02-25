@@ -45,12 +45,12 @@ class CacheGetServiceTest extends TestCase
         /** @var CacheGetService $cacheGetServiceTest */
         $cacheGetServiceTest = app()->make(CacheGetService::class);
         $cacheProvider = $cacheGetServiceTest->getCacheProvider();
-        if (class_exists('Redis')) {
-            $this->assertIsObject($cacheProvider);
-            $this->assertInstanceOf(RedisCache::class, $cacheProvider);
-        } elseif (class_exists('Memcached')) {
+        if (class_exists('Memcached')) {
             $this->assertIsObject($cacheProvider);
             $this->assertInstanceOf(MemCachedCache::class, $cacheProvider);
+        } elseif (class_exists('Redis')) {
+            $this->assertIsObject($cacheProvider);
+            $this->assertInstanceOf(RedisCache::class, $cacheProvider);
         } else {
             $this->assertIsObject($cacheProvider);
             $this->assertInstanceOf(AbsentCache::class, $cacheProvider);

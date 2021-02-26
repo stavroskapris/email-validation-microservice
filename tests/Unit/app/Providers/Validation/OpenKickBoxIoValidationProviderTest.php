@@ -17,7 +17,7 @@ use Mockery;
  *
  * @package Tests\Unit\app\Providers\Validation
  */
-class OpenKickBoxIoProviderTest extends TestCase
+class OpenKickBoxIoValidationProviderTest extends TestCase
 {
     /**
      * @test

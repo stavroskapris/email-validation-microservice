@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Providers\Validation\ValidationProvider;
 
 /**
  * Class EmailValidationService
@@ -12,14 +11,9 @@ use App\Providers\Validation\ValidationProvider;
 class EmailValidationService
 {
     /**
-     * @var
+     * @var ValidationProviderGetService
      */
     private $validationProviderGetService;
-
-    /**
-     * @var ValidationProvider
-     */
-    private $provider;
 
     /**
      * EmailValidationService constructor.
@@ -32,14 +26,15 @@ class EmailValidationService
     }
 
     /**
-     * @param string $domain
-     * @param string|null $provider
+     * @param string      $domain
+     * @param string|null $providerParam
+     *
      * @return string
      */
-    public function validateEmail(string $domain, ?string $provider): string
+    public function validateEmail(string $domain, ?string $providerParam): string
     {
-        $this->provider = $this->validationProviderGetService->getValidationProvider($provider);
+        $provider = $this->validationProviderGetService->getValidationProvider($providerParam);
 
-        return $this->provider->validate($domain);
+        return $provider->validate($domain);
     }
 }

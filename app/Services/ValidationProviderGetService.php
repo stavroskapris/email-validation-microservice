@@ -27,16 +27,17 @@ class ValidationProviderGetService
      * ValidationProviderGetService constructor.
      *
      * @param OpenKickBoxIo $kickBoxIo
-     * @param Debounce $debounce
+     * @param Debounce      $debounce
      */
     public function __construct(OpenKickBoxIo $kickBoxIo, Debounce $debounce)
     {
-        $this->debounce = $debounce;
+        $this->debounce  = $debounce;
         $this->kickBoxIo = $kickBoxIo;
     }
 
     /**
      * @param $provider
+     *
      * @return ValidationProvider
      */
     public function getValidationProvider(?string $provider): ValidationProvider
@@ -45,10 +46,8 @@ class ValidationProviderGetService
             case 'kickbox' :
             default :
                 return $this->kickBoxIo;
-                break;
             case 'debounce' :
                 return $this->debounce;
-                break;
         }
     }
 }

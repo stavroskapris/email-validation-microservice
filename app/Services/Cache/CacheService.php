@@ -21,6 +21,7 @@ class CacheService
      * CacheService constructor.
      *
      * @param CacheGetService $cacheGetService
+     *
      * @throws Exception
      */
     public function __construct(CacheGetService $cacheGetService)
@@ -30,6 +31,7 @@ class CacheService
 
     /**
      * @param string $key
+     *
      * @return mixed
      */
     public function get(string $key)
@@ -40,7 +42,7 @@ class CacheService
     /**
      * @param string $key
      * @param string $value
-     * @param int $ttl
+     * @param int    $ttl
      */
     public function set(string $key, string $value, int $ttl): void
     {
